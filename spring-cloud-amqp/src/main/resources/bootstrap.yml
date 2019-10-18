@@ -1,0 +1,29 @@
+spring:
+  cloud:
+    stream:
+      bindings:
+        input_channel:
+          destination: exchange-3  #指定的输出通道，绑定的交换器
+          group: queue-3 #队列名
+          binder: rabbit_culster  #setting cluster name 集群环境 下面的配置需要和这里对应
+          consumer:
+            concurrency: 1
+      rabbit:
+        bindings:
+          input_channel:
+            consumer:
+              requeue-rejected: false #
+              acknowledge-mode: MANUAL #手动签收
+              recovery-interval: 3000  #如果断开，3s重连
+              durable-subscription: true
+              max-concurrency: 5       #最大
+      binders:
+        rabbit_culster:           #这个地方的名和上面binder起一样的名
+          type: rabbit  #if usage kafka ，it need update set kafka
+          environment:
+            spring:
+              rabbitmq:
+                addresses: 39.107.245.189:5672
+                username: eblocks_dev
+                password: eblocks2018@china.com
+                virtual-host: /

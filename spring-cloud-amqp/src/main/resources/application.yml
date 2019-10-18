@@ -1,0 +1,24 @@
+server:
+  port: 8080
+
+
+spring:
+  application:
+    name: springcloudamqp
+  cloud:
+    stream:
+      bindings:
+        output_channel:
+          destination: exchange-3  #ָ�������ͨ�����󶨵Ľ�����
+          group: queue-3 #������
+          binder: rabbit_culster  #setting cluster name ��Ⱥ����
+      binders:
+        rabbit_culster: #���Ҫ��binder��������ݶ�Ӧ����
+          type: rabbit  #if usage kafka ��it need update set kafka
+          environment:
+            spring:
+              rabbitmq:
+                addresses: 39.107.245.189:5672
+                username: eblocks_dev
+                password: eblocks2018@china.com
+                virtual-host: /

@@ -3,17 +3,15 @@ server:
 
 
 spring:
-  application:
-    name: springcloudamqp
   cloud:
     stream:
       bindings:
         output_channel:
-          destination: exchange-3  #ָ�������ͨ�����󶨵Ľ�����
-          group: queue-3 #������
-          binder: rabbit_culster  #setting cluster name ��Ⱥ����
+          destination: exchange-3
+          group: queue-3
+          binder: rabbit_cluster  #setting cluster name ��Ⱥ����
       binders:
-        rabbit_culster: #���Ҫ��binder��������ݶ�Ӧ����
+        rabbit_cluster: #���Ҫ��binder��������ݶ�Ӧ����
           type: rabbit  #if usage kafka ��it need update set kafka
           environment:
             spring:

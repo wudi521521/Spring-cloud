@@ -1,11 +1,13 @@
 spring:
+  application:
+    name: nametest
   cloud:
     stream:
       bindings:
         input_channel:
-          destination: exchange-3  #指定的输出通道，绑定的交换器
-          group: queue-3 #队列名
-          binder: rabbit_culster  #setting cluster name 集群环境 下面的配置需要和这里对应
+          destination: exchange-3
+          group: queue-3
+          binder: rabbit_cluster  #setting rabbit_cluster name 集群环境 下面的配置需要和这里对应
           consumer:
             concurrency: 1
       rabbit:
@@ -18,7 +20,7 @@ spring:
               durable-subscription: true
               max-concurrency: 5       #最大
       binders:
-        rabbit_culster:           #这个地方的名和上面binder起一样的名
+        rabbit_cluster:           #这个地方的名和上面binder起一样的名
           type: rabbit  #if usage kafka ，it need update set kafka
           environment:
             spring:
